@@ -18,8 +18,9 @@ import css from './NotesPage.module.css';
 type NotesClientProps = {
   initialPage: number;
   initialText: string;
+  tag?: string;
 };
-function NotesClient({ initialPage, initialText }: NotesClientProps) {
+function NotesClient({ initialPage, initialText, tag }: NotesClientProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(initialPage);
 
@@ -27,8 +28,8 @@ function NotesClient({ initialPage, initialText }: NotesClientProps) {
   const [searchQuery, setSearchQuery] = useState(initialText);
 
   const { data, isError, error } = useQuery({
-    queryKey: ['notes', currentPage, searchQuery],
-    queryFn: () => fetchNotes(currentPage, searchQuery),
+    queryKey: ['notes', currentPage, searchQuery, tag],
+    queryFn: () => fetchNotes(currentPage, searchQuery, tag),
     placeholderData: keepPreviousData,
   });
 

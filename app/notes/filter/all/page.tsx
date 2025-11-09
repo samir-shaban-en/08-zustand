@@ -6,22 +6,22 @@ import {
 } from '@tanstack/react-query';
 import NotesClient from '@/app/notes/filter/all/Notes.client';
 type NoteDetailsProps = {
-  params?: { text?: string; currentPage?: number };
+  params?: { text?: string; currentPage?: number; tag?: string };
 };
 const App = async ({ params }: NoteDetailsProps) => {
   const currentPage = params?.currentPage ?? 1;
   const text = params?.text ?? '';
-
+  const tag = params?.tag ?? undefined;
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ['notes', currentPage, text],
-    queryFn: () => fetchNotes(currentPage, text),
+    queryKey: ['notes', currentPage, text, tag],
+    queryFn: () => fetchNotes(currentPage, text, tag),
   });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NotesClient initialPage={currentPage} initialText={text} />
+      <NotesClient initialPage={currentPage} initialText={text} tag={tag} />
     </HydrationBoundary>
   );
 };

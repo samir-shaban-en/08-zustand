@@ -16,10 +16,11 @@ interface NotesResponse {
 }
 const fetchNotes = async (
   currentPage: number,
-  text: string
+  text: string,
+  tag?: string
 ): Promise<NotesResponse> => {
   const { data } = await axios.get<NotesResponse>(
-    `https://notehub-public.goit.study/api/notes?search=${text}&page=${currentPage}&perPage=12`,
+    `https://notehub-public.goit.study/api/notes?search=${text}&page=${currentPage}&perPage=12${tag ? `&tag=${tag}` : ''}`,
     options
   );
 
