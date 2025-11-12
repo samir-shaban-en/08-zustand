@@ -18,7 +18,7 @@ export async function generateMetadata({
   const { id } = await params;
   const note = await getSingleNote(id);
 
-  const noteTitle = `Нотатка №${note.title}`;
+  const noteTitle = `Нотатка ${note.title}`;
   const noteDescription = `Детальний перегляд нотатки з ідентифікатором ${note.content}.`;
 
   return {
@@ -27,7 +27,7 @@ export async function generateMetadata({
     openGraph: {
       title: noteTitle,
       description: noteDescription,
-      url: `https://08-zustand-phi-taupe.vercel.app/notes/[id]/$${id}`,
+      url: `https://08-zustand-phi-taupe.vercel.app/notes/[id]/${id}`,
 
       images: [
         {
