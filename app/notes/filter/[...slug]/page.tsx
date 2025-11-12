@@ -1,4 +1,5 @@
 import { fetchNotes } from '@/lib/api';
+import { Metadata } from 'next';
 import {
   QueryClient,
   HydrationBoundary,
@@ -8,6 +9,31 @@ import NoteDetails from './Notes.client';
 type Props = {
   params: Promise<{ slug: string[] }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+
+  const title = `Нотатки — Фільтр: ${slug[0]}`;
+  const description = `Перегляд нотаток, відфільтрованих за критерієм: ${slug[0]}.`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `https://08-zustand-1pgixhllx-samirs-projects-29a0a574.vercel.app/notes/filter/${slug[0]}`,
+      images: [
+        {
+          url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+          width: 1200,
+          height: 630,
+          alt: `Нотатки — ${slug[0]}`,
+        },
+      ],
+    },
+  };
+}
 
 export default async function DocsPage({ params }: Props) {
   const { slug } = await params;
