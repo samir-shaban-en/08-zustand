@@ -6,6 +6,7 @@ import { getSingleNote } from '@/lib/api';
 
 const NoteDetailsClient = () => {
   const { id } = useParams<{ id: string }>();
+
   const {
     data: note,
     error,
@@ -15,11 +16,15 @@ const NoteDetailsClient = () => {
     queryFn: () => getSingleNote(id),
     refetchOnMount: false,
   });
+
   if (isLoading) return <p>Loading, please wait...</p>;
+
   if (error || !note) return <p>Something went wrong.</p>;
+
   const formattedDate = note.updatedAt
     ? `Updated at: ${note.updatedAt}`
     : `Created at: ${note.createdAt}`;
+
   return (
     <div className={css.container}>
       <div className={css.item}>
