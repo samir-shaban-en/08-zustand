@@ -5,7 +5,7 @@ import { createNote } from '@/lib/api';
 import { type NewNote } from '@/types/note';
 import { useRouter } from 'next/navigation';
 import { Metadata } from 'next';
-import { useNoteDraftStore } from '@/lib/stores/noteStore';
+import { useNoteDraftStore } from '@/lib/store/noteStore';
 export const metadata: Metadata = {
   title: 'Create new note | Notes App',
   description: 'Create a new note by entering title, content, and tag.',
