@@ -4,25 +4,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createNote } from '@/lib/api';
 import { type NewNote } from '@/types/note';
 import { useRouter } from 'next/navigation';
-import { Metadata } from 'next';
+
 import { useNoteDraftStore } from '@/lib/store/noteStore';
-export const metadata: Metadata = {
-  title: 'Create new note | Notes App',
-  description: 'Create a new note by entering title, content, and tag.',
-  openGraph: {
-    title: 'Create new note | Notes App',
-    description: 'Form for creating a new note.',
-    url: 'https://your-site.com/notes/action/create',
-    images: [
-      {
-        url: 'https://your-site.com/og/create-note.png',
-        width: 1200,
-        height: 630,
-        alt: 'Create note page',
-      },
-    ],
-  },
-};
 
 const NoteForm = () => {
   const router = useRouter();
